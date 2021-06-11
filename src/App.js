@@ -285,13 +285,13 @@ class App extends React.Component {
   }
   handleSearch = (e) => {
     this.setState({
-      query: e.target.value
+      query: (e.target.value).toLowerCase()
     })
   }
 
   filterMovieByQuery = () => {
     const titleEntered = this.state.allMovies.filter((elm, index) => {
-      if (this.state.query === elm.Title) {
+      if ((elm.Title).toLowerCase().includes(this.state.query)) {
         return true
       }
     })
@@ -303,10 +303,18 @@ class App extends React.Component {
       console.log(this.state.searchedMovie)
     }
   }
-
+  // runs after every state update
+  componentDidUpdate = (prevProps, prevState) => {
+    // console.log(prevState, "preStatehai")
+    // console.log(this.state, "currentState")
+    if (prevState.query !== this.state.query) {
+      this.filterMovieByQuery()
+    }
+  }
   render() {
     return (
       <React.Fragment>
+        <h1 style={{textAlign: "center"}}>Top Rated Movies By IMDB</h1>
         {this.state.isMovieDetailOpen ? (
           <MovieDetails allMovies={this.state.allMovies} selectedMovie={this.state.selectedMovie}/>
         ) : (
