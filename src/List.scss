@@ -1,0 +1,16 @@
+.listMainContainer{
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  .movieCardContainer{
+    margin: 20px;
+    cursor: pointer;
+    .movieImageContainer{
+      width: 300px;
+    }
+    .styleMovieTitle{
+      color: gray;
+    }
+  }
+}
