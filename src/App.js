@@ -3,6 +3,7 @@ import './App.scss';
 import React from 'react';
 import List from "./List"
 import MovieDetails from "./MovieDetails"
+import FilteredMovie from "./FilteredMovie"
 
 class App extends React.Component {
   constructor(props) {
@@ -270,7 +271,9 @@ class App extends React.Component {
         }
       ],
       selectedMovie: {},
-      isMovieDetailOpen: false
+      isLoading: false,
+      isMovieDetailOpen: false,
+      searchedMovie: {}
     }
   }
 
@@ -279,6 +282,26 @@ class App extends React.Component {
       selectedMovie: elm,
       isMovieDetailOpen: true
     })
+  }
+  handleSearch = (e) => {
+    this.setState({
+      query: e.target.value
+    })
+  }
+
+  filterMovieByQuery = () => {
+    const titleEntered = this.state.allMovies.filter((elm, index) => {
+      if (this.state.query === elm.Title) {
+        return true
+      }
+    })
+    if (titleEntered.length) {
+      this.setState({
+        searchedMovie: titleEntered,
+        isLoading: true
+      })
+      console.log(this.state.searchedMovie)
+    }
   }
 
   render() {
@@ -290,10 +313,15 @@ class App extends React.Component {
           <React.Fragment>
             <div className="topContainer">
               <input type="text" value={this.state.query} placeholder="Enter movie name"    
-                // onChange={this.handleSearch}
-                />
+                onChange={this.handleSearch}
+              />
             </div>
-            <List allMovies={this.state.allMovies} handleMovieSelection={this.handleMovieSelection}/>
+            {this.state.isLoading && this.state.query.length >= 3 ? (
+              <FilteredMovie allMovies={this.state.allMovies} query={this.state.query} searchedMovie={this.state.searchedMovie}/>
+            ) : (
+              <List allMovies={this.state.allMovies} handleMovieSelection={this.handleMovieSelection}/>
+            )}
+            
           </React.Fragment>          
         )}
         
