@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.scss';
 import React from 'react';
 import List from "./List"
-import MovieDetails from "./movieDetails"
+import MovieDetails from "./MovieDetails"
 
 class App extends React.Component {
   constructor(props) {
@@ -285,7 +285,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         {this.state.isMovieDetailOpen ? (
-          <movieDetails allMovies={this.state.allMovies} selectedMovie={this.state.selectedMovie}/>
+          <MovieDetails allMovies={this.state.allMovies} selectedMovie={this.state.selectedMovie}/>
         ) : (
           <React.Fragment>
             <div className="topContainer">

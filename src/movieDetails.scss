@@ -1,0 +1,13 @@
+.mainContainer{
+  width: 70%;
+  margin: 0 auto;
+  .movieDescriptionContainer{
+    line-height: 1.5;
+    .rateMovie{
+      .ratingOneToFive{
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}
